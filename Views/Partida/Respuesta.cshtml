@@ -1,0 +1,35 @@
+﻿
+@if (ViewBag.value==true)
+{
+    <div class="text-center mt-5" style="border:1px solid red">
+        <h1 class="display-4"> Bien </h1>
+
+
+    </div>
+
+    <div>
+        <form method="post">
+            <button class="btn btn-primary" asp-action="Juego" asp-route-pos="@ViewBag.posiciones"> Siguiente </button>
+        </form>
+    </div>
+}
+else
+{
+
+    <div class="text-center mt-5" style="border:1px solid red">
+        <h1 class="display-4"> mal </h1>
+
+
+    </div>
+
+    <div>
+        <form method="post">
+            <button class="btn btn-primary" asp-action="Juego"> Siguiente </button>
+        </form>
+    </div>
+
+}
+
+
+
+

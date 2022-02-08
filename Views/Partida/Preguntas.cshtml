@@ -1,0 +1,39 @@
+﻿
+@model IEnumerable<Respuestas>
+
+
+<div class="container">
+    <div class="text-center mt-5" style="border:1px solid red">
+        <h1 class="display-4"> @ViewBag.question </h1>
+        <h1>@ViewBag.bateo</h1>
+
+    </div>
+
+
+    @foreach (var item in Model)
+    {
+        <div>
+            <div class="col-md-12" style="display:flex">
+                <div class="col-md-6">
+                    <div>
+                        <form method="post">
+                            <div>
+                                <button class="btn btn-outline-danger" asp-controller="Partida" asp-action="Respuesta" asp-route-id="@item.IsCorrect" asp-route-jBase="@ViewBag.bateo"  >@item.Respuesta </button>
+                                 
+                            </div>
+
+                                                           
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+
+
+</div>
+
+
