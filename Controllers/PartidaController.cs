@@ -1,5 +1,6 @@
 ﻿using BASEBALLBIBICOWEB.Core.Contract;
 using BASEBALLBIBICOWEB.Models;
+using BASEBALLBIBICOWEB.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -7,38 +8,51 @@ namespace BASEBALLBIBICOWEB.Controllers
 {
     public class PartidaController : Controller
     {
-
+        int posicion=0;
+        int outs = 0;
+        string libroSeleccionado;
+        string modoSeleccionado;
+        Carrera info = new Carrera();
         readonly IJuegoRepository _juegoRepository;
+
 
         public PartidaController(IJuegoRepository juegoRepository)
         {
             _juegoRepository=juegoRepository;
         }
-        int posicion;
 
         public IActionResult Partida()
         {
             return View();
         }
 
-        public IActionResult Modalidad()
+        public IActionResult Modalidad(string libro)
         {
+            libroSeleccionado= libro;
             return View();
         }
 
         public IActionResult Juego()
 
         {
+            var result = jugadas.Categorias;
+            var outs = jugadas.Carrera.Out;
+            var carreras = jugadas.Carrera.Valor; ;
+           
+            
+            ViewBag.outs = outs;
+            ViewBag.inning = jugadas.innings.Value;
 
-            return View();
+            ViewBag.carrerasAnotadas = carreras;
+
+            return View(result);
         }
-
         
-        public async Task<IActionResult> Preguntas(Base model)
+
+        public async Task<IActionResult> Preguntas(Categoria model)
         {
 
-            
-            var result = await _juegoRepository.GetPreguntas(model.Jbase);
+            var result = await _juegoRepository.GetPreguntas(model.Jbase,modoSeleccionado,libroSeleccionado);
 
             if (result==null)
             {
@@ -53,9 +67,9 @@ namespace BASEBALLBIBICOWEB.Controllers
             return View(respuesta);
         }
 
-        public async Task< IActionResult> Custom()
+        public async Task<IActionResult> Custom()
         {
-            var result =await _juegoRepository.GetLibros();
+            var result = await _juegoRepository.GetLibros();
             return View(result);
         }
 
@@ -69,37 +83,39 @@ namespace BASEBALLBIBICOWEB.Controllers
             return View();
         }
 
-        public IActionResult Respuesta(bool id,string jBase )
+        public IActionResult Respuesta(bool id, string jBase)
         {
-            
-            
+
+            int valor = 0;
             ViewBag.value = id;
             ViewBag.posiciones = posicion;
-
-
-            if (id==true)
+            if (id==false)
+            {
+                outs =1;
+            }
+            else
             {
                 switch (jBase)
                 {
                     case "HIT":
-                        posicion=1;
+                        valor =1;
                         break;
-
                     case "DOBLE":
-                        posicion=2;
+                        valor =2;
                         break;
                     case "TRIPLE":
-                        posicion=3;
+                        valor =3;
                         break;
-                    case "HOMERUM":
-                        posicion=4;
+                    case "HOMERUN":
+                        valor =4;
                         break;
+
                     default:
                         break;
                 }
             }
-            
 
+            jugadas.JugadorBatea(new Categoria { Jbase = jBase, Valor= valor }, outs);
 
             return View();
         }

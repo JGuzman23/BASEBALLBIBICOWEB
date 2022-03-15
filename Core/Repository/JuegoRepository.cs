@@ -21,13 +21,13 @@ namespace BASEBALLBIBICOWEB.Core.Repository
             _configuration=configuration;
         }
 
-        public async Task<Preguntas> GetPreguntas(string jbase)
+        public async Task<Preguntas> GetPreguntas(string jbase,string level, string libro)
         {
 
             using (var conn = _connection.GetConnection())
             {
 
-                var query = $"Select id,pregunta from Preguntas where Base = '{jbase}'";
+                var query = $"  Select p.Pregunta, p.id from preguntas p where  p.Base='{jbase}' and libro like'{libro}%'";
                 var reades = await conn.QueryFirstOrDefaultAsync<Preguntas>(
                     sql: query,
                     commandType: System.Data.CommandType.Text

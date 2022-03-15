@@ -6,7 +6,7 @@ namespace BASEBALLBIBICOWEB.Core.Contract
 {
     public  interface IJuegoRepository
     {
-        Task<Preguntas> GetPreguntas(string jbase);
+        Task<Preguntas> GetPreguntas(string jbase, string level, string libro);
         Task<List<Respuestas>> GetRespuesta(int id);
         Task<List<Preguntas>> GetLibros();
     }

@@ -1,7 +1,8 @@
-﻿@model Base
+﻿@model IEnumerable<Categoria>
 
 <div class="text-center mt-5" style="border:1px solid red">
     <h1 class="display-4">Baseball Biblico </h1>
+
 
 
 </div>
@@ -34,20 +35,14 @@
                         <span> HOME RUM</span>
                     </div>
 
-
-
                 </div>
 
             </div>
             <div class="col-md-4">
 
-
                 <div>
                     <button class="btn btn-outline-success" asp-controller="Partida" asp-action="Preguntas" type="submit">BATEAR </button>
                 </div>
-
-
-
 
             </div>
         </form>
@@ -55,22 +50,31 @@
         <div class="col-md-4">
 
         </div>
-
-
-
     </div>
 
     <div class="col-md-12">
 
         <div>
             <div class="col-md-6">
+                <span>Out: @ViewBag.outs</span>
+               
+                @if (Model!=null)
+                {
+                    @foreach (var item in Model)
+                    {
 
-
+                        <h3>@item.Valor</h3>
+                       
+                    }
+                }
+                else
+                {
+                    <h3>Nadie en base</h3>
+                }
             </div>
         </div>
 
     </div>
-
 
     <div class="col-md-12 mt-5 ">
 
@@ -78,28 +82,12 @@
             <table class="table" style="border: 1px solid gray">
                 <thead>
                     <tr>
-                        <th>
+                      
 
-                        </th>
+                        <th data-bind="text: num">Inning: @ViewBag.inning</th>
+                        <th>Carreras anotadas</th>
 
-                        <th data-bind="text: num">1</th>
 
-                        <th data-bind="text: num">2</th>
-
-                        <th data-bind="text: num">3</th>
-
-                        <th data-bind="text: num">4</th>
-
-                        <th data-bind="text: num">5</th>
-
-                        <th data-bind="text: num">6</th>
-
-                        <th data-bind="text: num">7</th>
-
-                        <th data-bind="text: num">8</th>
-
-                        <th data-bind="text: num">9</th>
-                        <!-- /ko -->
                     </tr>
                 </thead>
                 <tbody>
@@ -107,46 +95,18 @@
                         <td>
                             <span>Luz de la pampara</span>
                         </td>
-                        <td>0</td>
+                       
+                        <td>@ViewBag.carrerasAnotadas</td>
 
-                        <td>0</td>
-
-                        <td>0</td>
-
-                        <td>0</td>
-
-                        <td>0</td>
-
-                        <td>-</td>
-
-                        <td>-</td>
-
-                        <td>-</td>
-
-                        <td>-</td>
                     </tr>
                     <tr>
                         <td>
                             <span>Verdad encendida</span>
                         </td>
-                        <!-- ko foreach: innings -->
-                        <td>0</td>
 
-                        <td>1</td>
+                        <td>@ViewBag.carrerasAnotadas</td>
 
-                        <td>0</td>
 
-                        <td>0</td>
-
-                        <td>0</td>
-
-                        <td>-</td>
-
-                        <td>-</td>
-
-                        <td>-</td>
-
-                        <td>-</td>
 
                     </tr>
                 </tbody>
