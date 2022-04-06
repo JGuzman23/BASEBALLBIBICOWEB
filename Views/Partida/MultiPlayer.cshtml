@@ -1,16 +1,19 @@
-﻿<div class="text-center mt-5" style="border:1px solid red">
+﻿@model Equipo
+
+
+<div class="text-center mt-5" style="border:1px solid red">
     <h1 class="display-4">Multilayer </h1>
 
 
 </div>
 
 <form method="post">
-
     <div class="col-md-12" style="display:flex">
         <div class="col-md-6">
             <div class="form-control">
                 <span> Equipo 1</span>
-                <input type="Text" name="name" value="" />
+                @*<input  type="Text" name="name" value="" />*@
+               @Html.TextBoxFor(x =>x.Name, new { placeholder = "Equipo 1"})
 
             </div>
         </div>

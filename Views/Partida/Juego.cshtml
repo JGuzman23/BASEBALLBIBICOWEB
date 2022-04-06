@@ -1,124 +1,218 @@
 ﻿@model IEnumerable<Categoria>
+@{
+    Layout = "_Layout";
+}
 
-<div class="text-center mt-5" style="border:1px solid red">
-    <h1 class="display-4">Baseball Biblico </h1>
+@{
+    int primera = 0;
+    int segunda = 0;
+    int tercera = 0;
+}
+
+@if (Model != null)
+{
+    @foreach (var item in Model)
+    {
+        if (item.Valor == 1)
+        {
+            primera = 1;
+        }
+        if (item.Valor == 2)
+        {
+            segunda = 2;
+        }
+        if (item.Valor == 3)
+        {
+            tercera = 3;
+        }
+
+    }
+}
+
+<div class="container-father">
+    <div class="play-container">
+        <div id="stadium">
+            <div id="field" class="mowed-grass"></div>
+            <div id="in-field"></div>
+            <div id="in-field-grass" class="mowed-grass"></div>
+            <div id="batting-circle"></div>
+            <div id="first-base" class="base">
+
+                @if (primera == 1)
+                {
+                    <div class="pulse"></div>
+                }
+                <div class="action-area"></div>
+            </div>
+            <div id="second-base" class="base">
+                @if (segunda == 2)
+                {
+                    <div class="pulse"></div>
+                }
+                <div class="action-area"></div>
+            </div>
+            <div id="thrid-base" class="base">
+                @if (tercera == 3)
+                {
+                    <div class="pulse"></div>
+                }
+                <div class="action-area"></div>
+            </div>
+            <div id="home-plate">
+                <div class="action-area"></div>
+            </div>
+            <!-- <div class="home-plate-pulse pulse"></div> -->
+            <div id="base-lines"></div>
+            <div id="pitchers-mound"></div>
+            <div id="pitchers-plate"></div>
+            <div id="first-circle" class="half-circle"></div>
+            <div id="second-circle" class="half-circle"></div>
+            <div id="third-circle" class="half-circle"></div>
+            <div id="batters-box-right" class="batters-box"></div>
+            <div id="batters-box-left" class="batters-box"></div>
+            <div id="first-base-thing"></div>
+        </div>
+    </div>
+    <div class="control-container">
+
+        <div class="text-center mt-5" style="border:1px solid red">
+            <h1 class="display-4">Baseball Biblico </h1>
+        </div>
 
 
-
-</div>
-
-
-<div class="container">
-    <div class="col-md-12 juego-container">
+        <div class="container">
+            <div class="col-md-12 juego-container">
 
 
-        <form method="post" class="col-md-6">
-            <div class="col-md-4 ">
-
-                <div style="border: 1px solid red">
-
-
-                    <div>
-                        <input type="radio" name="Jbase" value="HIT" />
-                        <span> HIT</span>
+                <form method="post" class="col-md-6" style="display: flex">
+                    <div class="col-md-7" style="border-radius: 18px 0 0 18px; background: #02E15F; color: white; ">
+                        <div style="display: flex;">
+                            <div class="mr-1">
+                                <input type="radio" name="Jbase" value="HIT" />
+                            </div>
+                            <div>
+                                <h5> HIT</h5>
+                            </div>
+                        </div>
+                        <div style="display: flex;">
+                            <div class="mr-1">
+                                <input type="radio" name="Jbase" value="DOBLE" />
+                            </div>
+                            <div>
+                                <h5> DOBLE</h5>
+                            </div>
+                        </div>
+                        <div style="display: flex;">
+                            <div class="mr-1">
+                                <input type="radio" name="Jbase" value="TRIPLE" />
+                            </div>
+                            <div>
+                                <h5> TRIPLE</h5>
+                            </div>
+                        </div>
+                        <div style="display: flex;">
+                            <div class="mr-1">
+                                <input type="radio" name="Jbase" value="HOMERUM" />
+                            </div>
+                            <div>
+                                <h5> HOME RUM</h5>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <input type="radio" name="Jbase" value="DOBLE" />
-                        <span> DOBLE</span>
+                    <div class="col-md-7" style="border-radius: 0 18px 18px 0; background: #058AF6; color: white;">
+                        <div class="col-md-12" style="margin:auto; margin-top:30%;">
+                            <button asp-controller="Partida" asp-action="Preguntas" type="submit" style="background: #058AF6;"><h2>BATEAR</h2></button>
+                        </div>
                     </div>
-                    <div>
-                        <input type="radio" name="Jbase" value="TRIPLE" />
-                        <span> TRIPLE</span>
-                    </div>
-                    <div>
-                        <input type="radio" name="Jbase" value="HOMERUM" />
-                        <span> HOME RUM</span>
-                    </div>
+                </form>
+
+                <div class="col-md-4">
 
                 </div>
-
             </div>
-            <div class="col-md-4">
+
+            <div class="col-md-12">
 
                 <div>
-                    <button class="btn btn-outline-success" asp-controller="Partida" asp-action="Preguntas" type="submit">BATEAR </button>
+                    @*<div class="col-md-6">
+                        <span>Out: @ViewBag.outs</span>
+
+                        @if (Model != null)
+                        {
+                            @foreach (var item in Model)
+                            {
+                                if (item.Valor == 1)
+                                {
+                                    primera = 1;
+                                }
+                                if (item.Valor == 2)
+                                {
+                                    segunda = 2;
+                                }
+                                if (item.Valor == 3)
+                                {
+                                    tercera = 3;
+                                }
+
+                                <h3>@item.Valor</h3>
+
+                            }
+                        }
+                        else
+                        {
+                            <h3>Nadie en base</h3>
+                        }
+                    </div>*@
                 </div>
 
             </div>
-        </form>
 
-        <div class="col-md-4">
+            <div class="col-md-12 mt-5 ">
 
-        </div>
-    </div>
+                <div class="col-md-12 ">
+                    <table class="table" style="border: 1px solid gray">
+                        <thead>
+                            <tr>
 
-    <div class="col-md-12">
 
-        <div>
-            <div class="col-md-6">
-                <span>Out: @ViewBag.outs</span>
-               
-                @if (Model!=null)
-                {
-                    @foreach (var item in Model)
-                    {
+                                <th data-bind="text: num">Inning: @ViewBag.inning</th>
+                                <th>Carreras anotadas</th>
 
-                        <h3>@item.Valor</h3>
-                       
-                    }
-                }
-                else
-                {
-                    <h3>Nadie en base</h3>
-                }
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span>Luz de la pampara</span>
+                                </td>
+
+                                <td>@ViewBag.carrerasAnotadas</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Verdad encendida</span>
+                                </td>
+
+                                <td>@ViewBag.carrerasAnotadas</td>
+
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
             </div>
+
         </div>
-
     </div>
-
-    <div class="col-md-12 mt-5 ">
-
-        <div class="col-md-12 ">
-            <table class="table" style="border: 1px solid gray">
-                <thead>
-                    <tr>
-                      
-
-                        <th data-bind="text: num">Inning: @ViewBag.inning</th>
-                        <th>Carreras anotadas</th>
-
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <span>Luz de la pampara</span>
-                        </td>
-                       
-                        <td>@ViewBag.carrerasAnotadas</td>
-
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>Verdad encendida</span>
-                        </td>
-
-                        <td>@ViewBag.carrerasAnotadas</td>
-
-
-
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-
-
-
-    </div>
-
 </div>
+
 
 
 

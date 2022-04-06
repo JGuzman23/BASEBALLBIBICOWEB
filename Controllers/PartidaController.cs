@@ -106,12 +106,12 @@ namespace BASEBALLBIBICOWEB.Controllers
                     case "TRIPLE":
                         valor =3;
                         break;
-                    case "HOMERUN":
+                    case "HOMERUM":
                         valor =4;
                         break;
 
                     default:
-                        break;
+                        break; 
                 }
             }
 
