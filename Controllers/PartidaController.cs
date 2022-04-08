@@ -11,7 +11,7 @@ namespace BASEBALLBIBICOWEB.Controllers
         int posicion=0;
         int outs = 0;
         string libroSeleccionado;
-        string modoSeleccionado;
+        string modoSeleccionado ="";
         Carrera info = new Carrera();
         readonly IJuegoRepository _juegoRepository;
 
@@ -35,11 +35,12 @@ namespace BASEBALLBIBICOWEB.Controllers
         public IActionResult Juego()
 
         {
+            
             var result = jugadas.Categorias;
             var outs = jugadas.Carrera.Out;
             var carreras = jugadas.Carrera.Valor; ;
-           
-            
+            var equipos = MultiplayerService.Equipos;
+            ViewBag.equipos = equipos;
             ViewBag.outs = outs;
             ViewBag.inning = jugadas.innings.Value;
 
@@ -47,6 +48,7 @@ namespace BASEBALLBIBICOWEB.Controllers
 
             return View(result);
         }
+
         
 
         public async Task<IActionResult> Preguntas(Categoria model)
@@ -73,9 +75,26 @@ namespace BASEBALLBIBICOWEB.Controllers
             return View(result);
         }
 
-        public IActionResult MultiPlayer()
+        public IActionResult MultiPlayer(Equipo equipo)
         {
-            return View();
+            MultiplayerService.multijugador(equipo);
+            var equipos = MultiplayerService.Equipos;
+
+            if (MultiplayerService.IsComplete)
+            {
+                equipos.RemoveAt(0);
+                return RedirectToAction("Juego");
+
+            }
+            if (equipos.Count == 2)
+            {
+                return View("Rival");
+            }
+            
+           return View();
+            
+
+            
         }
 
         public IActionResult GeneralOrCustom()
@@ -88,13 +107,16 @@ namespace BASEBALLBIBICOWEB.Controllers
 
             int valor = 0;
             ViewBag.value = id;
+         
             ViewBag.posiciones = posicion;
             if (id==false)
             {
                 outs =1;
+                ViewBag.respuesta = "Incorrecto!";
             }
             else
             {
+                ViewBag.respuesta = "Correcto!!!";
                 switch (jBase)
                 {
                     case "HIT":

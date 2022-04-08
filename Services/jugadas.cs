@@ -15,7 +15,9 @@ namespace BASEBALLBIBICOWEB.Services
 
         public static void JugadorBatea(Categoria categoria, int outs)
         {
-            if (Categorias == null)
+
+
+            if (Categorias == null )
                 Categorias = new List<Categoria>();
 
 
@@ -28,6 +30,13 @@ namespace BASEBALLBIBICOWEB.Services
                 if (!Categorias.Any())
                 {
                     Categorias.Add(categoria);
+                    if (categoria.Valor == 4)
+                    {
+                        var carrerasAnotadas = Categorias.Where(x => x.Valor > 3);
+                        Carrera.Valor += carrerasAnotadas.Count();
+                        Categorias.RemoveAll(x => x.Valor > 3);
+                    }
+
                 }
                 else
                 {
@@ -56,6 +65,7 @@ namespace BASEBALLBIBICOWEB.Services
                 {
                     Carrera.Out=0;
                     Categorias.Clear();
+
                 }
             }
             

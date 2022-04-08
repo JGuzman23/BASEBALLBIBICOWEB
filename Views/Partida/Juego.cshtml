@@ -28,6 +28,31 @@
 
     }
 }
+<style>
+
+    .bases {
+        display: flex;
+        width: 400px;
+        
+    }
+
+    .primera {
+        background: red;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    body {
+        background-image: url('../IMG/677B3AB8-12A4-47F3-B082-66CD99698317.JPEG');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+ 
+</style>
 
 <div class="container-father">
     <div class="play-container">
@@ -75,17 +100,19 @@
     </div>
     <div class="control-container">
 
-        <div class="text-center mt-5" style="border:1px solid red">
-            <h1 class="display-4">Baseball Biblico </h1>
-        </div>
+        
 
 
         <div class="container">
+            <div class=" mt-5">
+                <h1 style="font-size:70px ; color:whitesmoke;">Baseball Biblico </h1>
+            </div>
+            <hr />
             <div class="col-md-12 juego-container">
 
 
                 <form method="post" class="col-md-6" style="display: flex">
-                    <div class="col-md-7" style="border-radius: 18px 0 0 18px; background: #02E15F; color: white; ">
+                    <div class="col-md-7" style="border-radius: 18px 0 0 18px; background: #129730; color: white; ">
                         <div style="display: flex;">
                             <div class="mr-1">
                                 <input type="radio" name="Jbase" value="HIT" />
@@ -121,7 +148,7 @@
                     </div>
                     <div class="col-md-7" style="border-radius: 0 18px 18px 0; background: #058AF6; color: white;">
                         <div class="col-md-12" style="margin:auto; margin-top:30%;">
-                            <button asp-controller="Partida" asp-action="Preguntas" type="submit" style="background: #058AF6;"><h2>BATEAR</h2></button>
+                            <button asp-controller="Partida" asp-action="Preguntas" type="submit" style="background: #058AF6; color:white;"><h2>BATEAR</h2></button>
                         </div>
                     </div>
                 </form>
@@ -133,73 +160,68 @@
 
             <div class="col-md-12">
 
-                <div>
-                    @*<div class="col-md-6">
-                        <span>Out: @ViewBag.outs</span>
 
-                        @if (Model != null)
-                        {
-                            @foreach (var item in Model)
-                            {
-                                if (item.Valor == 1)
-                                {
-                                    primera = 1;
-                                }
-                                if (item.Valor == 2)
-                                {
-                                    segunda = 2;
-                                }
-                                if (item.Valor == 3)
-                                {
-                                    tercera = 3;
-                                }
-
-                                <h3>@item.Valor</h3>
-
-                            }
-                        }
-                        else
-                        {
-                            <h3>Nadie en base</h3>
-                        }
-                    </div>*@
-                </div>
 
             </div>
 
             <div class="col-md-12 mt-5 ">
-
                 <div class="col-md-12 ">
-                    <table class="table" style="border: 1px solid gray">
+
+                    <h2 style="color: white;">Outs:</h2>
+                    <div class="bases">
+
+                        @switch (@ViewBag.outs)
+                        {
+                            case 1:
+                                <div class="primera"></div>
+
+                                break;
+                            case 2:
+                                <div class="primera"></div>
+                                <div class="primera"></div>
+
+                                break;
+                            case 3:
+                                <div class="primera"></div>
+                                <div class="primera"></div>
+                                <div class="primera"></div>
+
+                                break;
+                            default:
+                                break;
+                        }
+
+
+
+                    </div>
+                    <br />
+
+                    <table class="table" style="border: 3px solid white; color: white; background: #836539; ">
                         <thead>
                             <tr>
 
 
-                                <th data-bind="text: num">Inning: @ViewBag.inning</th>
-                                <th>Carreras anotadas</th>
+                                <th data-bind="text: num"><h3>Inning: @ViewBag.inning</h3></th>
+                                <th> <h3>Carreras anotadas</h3></th>
 
 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <span>Luz de la pampara</span>
-                                </td>
 
-                                <td>@ViewBag.carrerasAnotadas</td>
+                            @foreach (var item in @ViewBag.equipos)
+                            {
+                                <tr>
+                                    <td>
+                                        <h5>@item.Name</h5>
+                                    </td>
 
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span>Verdad encendida</span>
-                                </td>
+                                    <td> <h5>@ViewBag.carrerasAnotadas</h5></td>
 
-                                <td>@ViewBag.carrerasAnotadas</td>
+                                </tr>
+                            }
 
-
-
-                            </tr>
+                           
                         </tbody>
                     </table>
                 </div>

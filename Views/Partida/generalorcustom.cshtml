@@ -1,19 +1,46 @@
-﻿<div class="container">
-    <div class="row">
-        <div class="modalidad-button">
-            <form method="post">
-                
-                <div>
-                    <button class="btn btn-outline-primary mt-2" asp-controller="Partida" asp-action="Modalidad"> General </button>
+﻿<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
+<style>
+    .a {
+        /*border: 1px solid red;*/
+    }
+
+    body {
+        background-image: url('../IMG/thumb-1920-102944.jpg');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+
+<div class="section-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 container a">
+                <h1 style="text-align: center;">Modalidad</h1>
+                <div class="col-md-6 container">
+                    <form method="post">
+                        <button class="btn btn-primary mt-2 col-md-12" asp-controller="Partida" asp-action="Modalidad"> <h3>General</h3> </button>
+                    </form>
                 </div>
-                <div>
-                    <button class="btn btn-outline-primary mt-2" asp-controller="Partida" asp-action="Custom"> Custom </button>
-
+                <div class="col-md-6 container mt-1">
+                    <form method="post">
+                        <button class="btn btn-primary mt-2 col-md-12" asp-controller="Partida" asp-action="Custom"> <h3>Custom</h3> </button>
+                    </form>
                 </div>
-            </form>
-
+            </div>
         </div>
     </div>
-
 </div>

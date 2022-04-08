@@ -2,37 +2,61 @@
 @model IEnumerable<Respuestas>
 
 
+<style>
+    .titulo {
+        font-size: 80px;
+        color: white;
+        -webkit-text-stroke: 2px black;
+    }
+
+    .botones {
+        display: flex;
+        margin-top: 20px;
+        height: 700px;
+    }
+
+    .forma-btn {
+        height: 100px;
+        width: 320px;
+        margin-top: 100px;
+    }
+    body {
+        background-image: url('../IMG/baseball-wallpaper-7.jpg');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 <div class="container">
-    <div class="text-center mt-5" style="border:1px solid red">
-        <h1 class="display-4"> @ViewBag.question </h1>
+    <div class="text-center mt-5">
+        <h1 class="titulo"> @ViewBag.question </h1>
 
     </div>
-
+</div>
+<div class="col-md-12   botones">
 
     @foreach (var item in Model)
     {
-        <div>
-            <div class="col-md-12" style="display:flex">
-                <div class="col-md-6">
-                    <div>
-                        <form method="post">
-                            <div>
-                                <button class="btn btn-outline-danger" asp-controller="Partida" asp-action="Respuesta" asp-route-id="@item.IsCorrect" asp-route-jBase="@ViewBag.bateo"  >@item.Respuesta </button>
-                                 
-                            </div>
 
-                                                           
+        <div class="col-3 mt-4">
+            <form method="post">
+                <div>
+                    <button class="btn btn-primary forma-btn" asp-controller="Partida" asp-action="Respuesta" asp-route-id="@item.IsCorrect" asp-route-jBase="@ViewBag.bateo"> <h3>@item.Respuesta</h3>  </button>
 
-                        </form>
-                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-
     }
-
-
-
 </div>
+
 
 

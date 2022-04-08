@@ -12,10 +12,11 @@
 <br />
 
 <style>
-    .titulo{
-        color:white;
-        font-size:50px;
+    .titulo {
+        color: white;
+        font-size: 50px;
     }
+
     body {
         background-image: url('../IMG/baseball-wallpaper-7.jpg');
         -webkit-background-size: cover;
@@ -37,12 +38,12 @@
             <div class="row">
                 <div class="col-md-8 container a">
                     <div class="col-md-6 container">
-                        
+
                         @Html.TextBoxFor(x => x.Name, new { placeholder = "Nombre del equipo", @class = "form-control" })
 
                     </div>
                     <div class="col-md-6 container mt-1">
-                        <button type="submit" class="btn btn-danger col-md-12" asp-controller="Partida" asp-action="MultiPlayer" asp-route-equipo="@Model"><h3>Agregar Rival</h3></button>
+                        <button type="submit" class="btn btn-danger col-md-12" asp-controller="Partida" asp-action="MultiPlayer" asp-route-equipo="@Model"><h3>Jugar</h3></button>
                     </div>
                 </div>
             </div>

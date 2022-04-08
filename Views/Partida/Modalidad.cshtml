@@ -1,29 +1,53 @@
-﻿<div class="text-center mt-5" style="border:1px solid red">
-    <h1 class="display-4">Singler Player </h1>
+﻿
 
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
-</div>
+<style>
+    .a {
+        /*border: 1px solid red;*/
+    }
 
-<div class="container">
-    <div class="row">
-        <div class="modalidad-button">
-            <form method="post">
-                <div>
-                    <button class="btn btn-outline-primary mt-2 " asp-controller="Partida" asp-action="Juego" asp-route-modo="fa" > Facil </button>
+    body {
+        background-image: url('../IMG/baseball-wallpaper-7.jpg');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
 
+<div class="section-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 container a">
+                <h1 style="text-align: center; color:white;">Nivel</h1>
+                <div class="col-md-6 container">
+                    <form method="post">
+                        <button class="btn btn-primary mt-2 col-md-12" asp-controller="Partida" asp-action="Juego" asp-route-modo="fa"> Facil </button>
+                    </form>
                 </div>
-                <div>
-                    <button class="btn btn-outline-primary mt-2" asp-controller="Partida" asp-action="Juego" asp-route-modo="me"> Medio </button>
-
+                <div class="col-md-6 container mt-1">
+                    <form method="post">
+                        <button class="btn btn-primary mt-2 col-md-12" asp-controller="Partida" asp-action="Juego" asp-route-modo="me"> Medio </button>
+                    </form>
                 </div>
-                <div>
-                    <button class="btn btn-outline-primary mt-2" asp-controller="Partida" asp-action="Juego" asp-route-modo="di"> Dificil </button>
-
+                <div class="col-md-6 container mt-1">
+                    <form method="post">
+                        <button class="btn btn-primary mt-2 col-md-12" asp-controller="Partida" asp-action="Juego" asp-route-modo="di"> Dificil </button>
+                    </form>
                 </div>
-               
-            </form>
-
+            </div>
         </div>
     </div>
-
 </div>
