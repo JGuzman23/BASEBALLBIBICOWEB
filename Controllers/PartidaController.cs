@@ -15,7 +15,7 @@ namespace BASEBALLBIBICOWEB.Controllers
         Carrera info = new Carrera();
         readonly IJuegoRepository _juegoRepository;
 
-
+  
         public PartidaController(IJuegoRepository juegoRepository)
         {
             _juegoRepository=juegoRepository;
@@ -35,15 +35,13 @@ namespace BASEBALLBIBICOWEB.Controllers
         public IActionResult Juego()
 
         {
-            
             var result = jugadas.Categorias;
             var outs = jugadas.Carrera.Out;
             var carreras = jugadas.Carrera.Valor; ;
             var equipos = MultiplayerService.Equipos;
+            ViewBag.inning = jugadas.innings.Value;
             ViewBag.equipos = equipos;
             ViewBag.outs = outs;
-            ViewBag.inning = jugadas.innings.Value;
-
             ViewBag.carrerasAnotadas = carreras;
 
             return View(result);
@@ -75,16 +73,27 @@ namespace BASEBALLBIBICOWEB.Controllers
             return View(result);
         }
 
-        public IActionResult MultiPlayer(Equipo equipo)
+        public IActionResult MultiPlayer(Equipo equipo, bool single )
         {
-            MultiplayerService.multijugador(equipo);
-            var equipos = MultiplayerService.Equipos;
+            
 
-            if (MultiplayerService.IsComplete)
+            if (single)
+            {
+                ViewBag.title = "Single Player";
+               
+            }
+            else
+            {
+                ViewBag.title = "Multi-Player";
+            }
+            MultiplayerService.multijugador(equipo,single);
+            var equipos = MultiplayerService.Equipos;
+           
+           
+            if (MultiplayerService.IsComplete )
             {
                 equipos.RemoveAt(0);
-                return RedirectToAction("Juego");
-
+                return RedirectToAction("GeneralOrCustom");
             }
             if (equipos.Count == 2)
             {
@@ -92,9 +101,7 @@ namespace BASEBALLBIBICOWEB.Controllers
             }
             
            return View();
-            
-
-            
+   
         }
 
         public IActionResult GeneralOrCustom()
@@ -105,39 +112,13 @@ namespace BASEBALLBIBICOWEB.Controllers
         public IActionResult Respuesta(bool id, string jBase)
         {
 
-            int valor = 0;
-            ViewBag.value = id;
-         
+            RespuestaService.Respuesta(id, jBase, outs);
+            var valor = RespuestaService.ValorBase;
+            var respuesta = RespuestaService.ValorRespuesta;
+            var Outs = RespuestaService.Outs;
+            ViewBag.respuesta = respuesta;
             ViewBag.posiciones = posicion;
-            if (id==false)
-            {
-                outs =1;
-                ViewBag.respuesta = "Incorrecto!";
-            }
-            else
-            {
-                ViewBag.respuesta = "Correcto!!!";
-                switch (jBase)
-                {
-                    case "HIT":
-                        valor =1;
-                        break;
-                    case "DOBLE":
-                        valor =2;
-                        break;
-                    case "TRIPLE":
-                        valor =3;
-                        break;
-                    case "HOMERUM":
-                        valor =4;
-                        break;
-
-                    default:
-                        break; 
-                }
-            }
-
-            jugadas.JugadorBatea(new Categoria { Jbase = jBase, Valor= valor }, outs);
+            jugadas.JugadorBatea(new Categoria { Jbase = jBase, Valor= valor }, Outs);
 
             return View();
         }

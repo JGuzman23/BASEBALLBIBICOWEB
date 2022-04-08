@@ -59,18 +59,32 @@ namespace BASEBALLBIBICOWEB.Services
                 if (Carrera.CantOutByInning ==6)
                 {
                     innings.Value++;
+
+
+                    LogicInnin(innings.Value);
+                    
                     
                 }
                 if (Carrera.Out >2)
                 {
                     Carrera.Out=0;
                     Categorias.Clear();
-
+                   
                 }
             }
-            
+
+
+           
            
 
         }
+        public static void LogicInnin(int inning)
+        {
+            //Aqui se aplicara la logica los innin
+            // Si el innin es mayor que 5, el equipo con mas carreras gana
+            // Si el equipo que no es home club tiene menos carrera al terminar
+            // su inning # 5, el equipo contrario gana
+        }
+
     }
 }

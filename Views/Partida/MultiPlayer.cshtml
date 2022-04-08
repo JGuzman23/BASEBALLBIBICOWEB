@@ -26,19 +26,19 @@
 </style>
 
 <div class="text-center mt-5">
-    <h1 class="titulo">Multi-Jugador </h1>
+    <h1 class="titulo">@ViewBag.title </h1>
 
 
 </div>
 <br />
 <div class="section-center">
-    <form method="post">
+    <form method="post" autocomplete="off">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 container a">
                     <div class="col-md-6 container">
                         
-                        @Html.TextBoxFor(x => x.Name, new { placeholder = "Nombre del equipo", @class = "form-control" })
+                        @Html.TextBoxFor(x => x.Name, new { autocomplete = "off", placeholder = "Nombre del equipo", @class = "form-control" })
 
                     </div>
                     <div class="col-md-6 container mt-1">
