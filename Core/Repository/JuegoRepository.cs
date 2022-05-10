@@ -27,7 +27,7 @@ namespace BASEBALLBIBICOWEB.Core.Repository
             using (var conn = _connection.GetConnection())
             {
 
-                var query = $"  Select p.Pregunta, p.id from preguntas p where  p.Base='{jbase}' and libro like'{libro}%'";
+                var query = $"  Select p.Pregunta, p.id from preguntas p where  p.Base='{jbase}' and libro like'{libro}%' and p.Vista= 0 ORDER BY NEWID()";
                 var reades = await conn.QueryFirstOrDefaultAsync<Preguntas>(
                     sql: query,
                     commandType: System.Data.CommandType.Text
@@ -54,6 +54,22 @@ namespace BASEBALLBIBICOWEB.Core.Repository
                 return reades.ToList();
             }
         }
+        public async Task<Respuestas> MarcarPregunta(int id)
+        {
+
+            using (var conn = _connection.GetConnection())
+            {
+
+                var query = $"  UPDATE Preguntas SET Vista = 1 where Id={id}";
+                var reades = await conn.QuerySingleAsync(
+                    sql: query,
+                    commandType: System.Data.CommandType.Text
+                    );
+
+
+                return reades;
+            }
+        }
 
         public async Task<List<Preguntas>> GetLibros()
         {
@@ -72,9 +88,24 @@ namespace BASEBALLBIBICOWEB.Core.Repository
             }
         }
 
+        public async Task<Respuestas> ReiniciarJuego()
+        {
 
+            using (var conn = _connection.GetConnection())
+            {
+
+                var query = $"UPDATE Preguntas SET Vista = 0";
+                var reades = await conn.QuerySingleAsync(
+                    sql: query,
+                    commandType: System.Data.CommandType.Text
+                    );
+
+                return reades;
+            }
+        }
 
     }
+    
 
-
+    
 }

@@ -15,7 +15,8 @@ namespace BASEBALLBIBICOWEB.Controllers
         Carrera info = new Carrera();
         readonly IJuegoRepository _juegoRepository;
 
-  
+        public int idpregunta { get; set; }
+
         public PartidaController(IJuegoRepository juegoRepository)
         {
             _juegoRepository=juegoRepository;
@@ -36,9 +37,12 @@ namespace BASEBALLBIBICOWEB.Controllers
 
         {
             var result = jugadas.Categorias;
-            var outs = jugadas.Carrera.Out;
-            var carreras = jugadas.Carrera.Valor; ;
+            var outs = jugadas.Carrera._Out;
+            var carreras = jugadas.Carrera._Valor; 
+
             var equipos = MultiplayerService.Equipos;
+            
+           
             ViewBag.inning = jugadas.innings.Value;
             ViewBag.equipos = equipos;
             ViewBag.outs = outs;
@@ -46,8 +50,6 @@ namespace BASEBALLBIBICOWEB.Controllers
 
             return View(result);
         }
-
-        
 
         public async Task<IActionResult> Preguntas(Categoria model)
         {
@@ -61,7 +63,8 @@ namespace BASEBALLBIBICOWEB.Controllers
 
             ViewBag.question= result.Pregunta;
             ViewBag.bateo = model.Jbase;
-
+            ViewBag.idPregunta = result.Id;
+            idpregunta = result.Id;
             var respuesta = await _juegoRepository.GetRespuesta(result.Id);
 
             return View(respuesta);
@@ -86,6 +89,7 @@ namespace BASEBALLBIBICOWEB.Controllers
             {
                 ViewBag.title = "Multi-Player";
             }
+
             MultiplayerService.multijugador(equipo,single);
             var equipos = MultiplayerService.Equipos;
            
@@ -109,19 +113,39 @@ namespace BASEBALLBIBICOWEB.Controllers
             return View();
         }
 
-        public IActionResult Respuesta(bool id, string jBase)
+        public IActionResult Respuesta(bool id, string jBase, int idPregunta)
         {
 
+          
+                _juegoRepository.MarcarPregunta(idPregunta);
+            
             RespuestaService.Respuesta(id, jBase, outs);
             var valor = RespuestaService.ValorBase;
             var respuesta = RespuestaService.ValorRespuesta;
+            var equipos = MultiplayerService.Equipos;
+           
             var Outs = RespuestaService.Outs;
-            ViewBag.respuesta = respuesta;
-            ViewBag.posiciones = posicion;
-            jugadas.JugadorBatea(new Categoria { Jbase = jBase, Valor= valor }, Outs);
+            
+            jugadas.JugadorBatea(new Categoria { Jbase = jBase, Valor= valor }, Outs, equipos);
 
+            if (jugadas.Ganador)
+            {
+
+                ViewBag.respuesta = jugadas.nombreGanador;
+                ViewBag.vueltas = jugadas.Vuelta;
+                _juegoRepository.ReiniciarJuego();
+
+            }
+            else
+            {
+                ViewBag.respuesta = respuesta;
+                ViewBag.posiciones = posicion;
+            }
+           
             return View();
         }
+
+    
 
 
     }

@@ -9,5 +9,7 @@ namespace BASEBALLBIBICOWEB.Core.Contract
         Task<Preguntas> GetPreguntas(string jbase, string level, string libro);
         Task<List<Respuestas>> GetRespuesta(int id);
         Task<List<Preguntas>> GetLibros();
+        Task<Respuestas> MarcarPregunta(int id);
+        Task<Respuestas> ReiniciarJuego();
     }
 }
