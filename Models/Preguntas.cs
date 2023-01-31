@@ -11,5 +11,7 @@
         public string Pregunta { get; set; }
 
         public string Libro { get; set; }
+
+        public bool Vista { get; set; }
     }
 }

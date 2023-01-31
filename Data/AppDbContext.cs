@@ -13,6 +13,6 @@ namespace BASEBALLBIBICOWEB.Data
 
         public DbSet<Preguntas> Preguntas { get; set; }
 
-        public DbSet<Respuestas> Prespuesta { get; set; }
+        public DbSet<Respuestas> Respuesta { get; set; }
     }
 }

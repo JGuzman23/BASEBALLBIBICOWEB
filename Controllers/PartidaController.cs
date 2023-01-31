@@ -10,7 +10,7 @@ namespace BASEBALLBIBICOWEB.Controllers
     {
         int posicion=0;
         int outs = 0;
-        string libroSeleccionado;
+        string libroSeleccionado ="";
         string modoSeleccionado ="";
         Carrera info = new Carrera();
         readonly IJuegoRepository _juegoRepository;

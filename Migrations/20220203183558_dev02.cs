@@ -22,7 +22,7 @@ namespace BASEBALLBIBICOWEB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Prespuesta",
+                name: "Respuesta",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
