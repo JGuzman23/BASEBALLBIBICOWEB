@@ -55,6 +55,8 @@ namespace BASEBALLBIBICOWEB.Controllers
         {
 
             var result = await _juegoRepository.GetPreguntas(model.Jbase,modoSeleccionado,libroSeleccionado);
+            var respuestaCorecte = await _juegoRepository.GetRespuestaCorrecta(result.Id);
+            var respuesta = await _juegoRepository.GetRespuestas(result.Id);
 
             if (result==null)
             {
@@ -65,7 +67,7 @@ namespace BASEBALLBIBICOWEB.Controllers
             ViewBag.bateo = model.Jbase;
             ViewBag.idPregunta = result.Id;
             idpregunta = result.Id;
-            var respuesta = await _juegoRepository.GetRespuesta(result.Id);
+            ViewBag.RespuestaCorrecta = respuestaCorecte.Respuesta;
 
             return View(respuesta);
         }
@@ -113,7 +115,7 @@ namespace BASEBALLBIBICOWEB.Controllers
             return View();
         }
 
-        public IActionResult Respuesta(bool id, string jBase, int idPregunta)
+        public IActionResult Respuesta(bool id, string jBase, int idPregunta, string respuestaC)
         {
 
           
@@ -140,6 +142,12 @@ namespace BASEBALLBIBICOWEB.Controllers
             {
                 ViewBag.respuesta = respuesta;
                 ViewBag.posiciones = posicion;
+                
+            }
+
+            if (!id)
+            {
+                ViewBag.RespuestaCorrecta = respuestaC;
             }
            
             return View();

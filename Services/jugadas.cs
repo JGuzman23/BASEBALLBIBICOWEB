@@ -36,6 +36,8 @@ namespace BASEBALLBIBICOWEB.Services
                 if (Carrera._CantOutByInning == 6)
                 {
                     innings.Value++;
+                    Carrera._CantOutByInning = 0;
+
                 }
                 if (Carrera._Out > 2)
                 {
@@ -111,7 +113,7 @@ namespace BASEBALLBIBICOWEB.Services
 
 
                 Ganador = true;
-                Vuelta = carrreras_nunEquipoCero;
+                Vuelta = carrreras_nunEquipoCero ;
                 nombreGanador = equipos.ElementAt(0).Name;
 
 

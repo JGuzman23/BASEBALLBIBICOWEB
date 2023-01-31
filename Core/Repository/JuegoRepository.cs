@@ -38,7 +38,7 @@ namespace BASEBALLBIBICOWEB.Core.Repository
             }
         }
 
-        public async Task<List<Respuestas>> GetRespuesta(int id)
+        public async Task<List<Respuestas>> GetRespuestas(int id)
         {
 
             using (var conn = _connection.GetConnection())
@@ -52,6 +52,22 @@ namespace BASEBALLBIBICOWEB.Core.Repository
 
 
                 return reades.ToList();
+            }
+        }
+        public async Task<Respuestas> GetRespuestaCorrecta(int id)
+        {
+
+            using (var conn = _connection.GetConnection())
+            {
+
+                var query = $"select Respuesta from Respuesta where IsCorrect=1 and IdPreguntasId= {id}";
+                var reades = await conn.QueryFirstOrDefaultAsync<Respuestas>(
+                    sql: query,
+                    commandType: System.Data.CommandType.Text
+                    );
+
+
+                return reades;
             }
         }
         public async Task<Respuestas> MarcarPregunta(int id)

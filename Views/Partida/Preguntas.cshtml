@@ -42,15 +42,15 @@
 
     </div>
 </div>
-<div class="col-md-12   botones">
+<div class="justify-content-center  botones">
 
     @foreach (var item in Model)
     {
 
-        <div class="col-3 mt-4">
+        <div class=" mr-5  mt-4">
             <form method="post">
                 <div>
-                    <button class="btn btn-primary forma-btn" asp-controller="Partida" asp-action="Respuesta" asp-route-idPregunta="@ViewBag.idPregunta" asp-route-id="@item.IsCorrect" asp-route-jBase="@ViewBag.bateo"> <h3>@item.Respuesta</h3>  </button>
+                    <button class="btn btn-primary forma-btn" asp-controller="Partida" asp-action="Respuesta" asp-route-idPregunta="@ViewBag.idPregunta" asp-route-id="@item.IsCorrect" asp-route-jBase="@ViewBag.bateo" asp-route-respuestaC="@ViewBag.RespuestaCorrecta"> <h3>@item.Respuesta</h3>  </button>
 
                 </div>
             </form>
