@@ -55,13 +55,14 @@ namespace BASEBALLBIBICOWEB.Controllers
         {
 
             var result = await _juegoRepository.GetPreguntas(model.Jbase,modoSeleccionado,libroSeleccionado);
-            var respuestaCorecte = await _juegoRepository.GetRespuestaCorrecta(result.Id);
-            var respuesta = await _juegoRepository.GetRespuestas(result.Id);
-
-            if (result==null)
+            if (result == null)
             {
                 return RedirectToAction("Juego");
             }
+            var respuestaCorecte = await _juegoRepository.GetRespuestaCorrecta(result.Id);
+            var respuesta = await _juegoRepository.GetRespuestas(result.Id);
+
+           
 
             ViewBag.question= result.Pregunta;
             ViewBag.bateo = model.Jbase;
