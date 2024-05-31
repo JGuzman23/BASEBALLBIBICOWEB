@@ -1,4 +1,4 @@
-﻿using BASEBALLBIBICOWEB.Core.Contract;
+using BASEBALLBIBICOWEB.Core.Contract;
 using BASEBALLBIBICOWEB.Data;
 using BASEBALLBIBICOWEB.Models;
 using Dapper;
@@ -27,7 +27,7 @@ namespace BASEBALLBIBICOWEB.Core.Repository
             using (var conn = _connection.GetConnection())
             {
 
-                var query = $"  Select p.Pregunta, p.id from preguntas p where  p.Base='{jbase}' and libro like'{libro}%' and p.Vista= 0 ORDER BY NEWID()";
+                var query = $"  Select p.Pregunta, p.id from preguntas p where  p.Base='{jbase}' and p.Vista= 0 ORDER BY NEWID()";
                 var reades = await conn.QueryFirstOrDefaultAsync<Preguntas>(
                     sql: query,
                     commandType: System.Data.CommandType.Text
@@ -44,7 +44,7 @@ namespace BASEBALLBIBICOWEB.Core.Repository
             using (var conn = _connection.GetConnection())
             {
 
-                var query = $"Select respuesta, isCorrect from Respuesta where IdPreguntasId = {id}";
+                var query = $"Select respuesta, isCorrect from Respuesta where IdPreguntasId = {id} ORDER BY NEWID()";
                 var reades = await conn.QueryAsync<Respuestas>(
                     sql: query,
                     commandType: System.Data.CommandType.Text
